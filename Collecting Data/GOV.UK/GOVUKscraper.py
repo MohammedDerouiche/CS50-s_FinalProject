@@ -15,21 +15,19 @@ def main():
     session = requests.Session()
     url = "https://findajob.dwp.gov.uk/search" # The job search first page URL
     headers = staticHeadersRotator()
-    locations = {'South East Englasd':[{"86465":"Kent"},{"86437":"Hampshire"},{"86463":"Surrey"},{"86395":"Buckinghamshire"},{"86466":"East Sussex"},{"86411":"Oxfordshire"},{"86434":"West Sussex"},{"86464":"Berkshire"},{"86476":"West Berkshire"},{"86469":"Isle Of Wight"},{"86447":"Windsor & Maidenhead"}],
-                 'North West Englasd':[{"86397":"Greater Manchester"},{"86415":"Lancashire"},{"86419":"Merseyside"},{"86452":"Cheshire"},{"86417":"Cumbria"}],
-                 'London':[{"86510":"South West London"},{"86583":"South East London"},{"86592":"East London"},{"86588":"North West London"},{"86585":"North London"},{"86590":"Central London"},{"86602":"Harrow"},{"86591":"Uxbridge"},{"86608":"Sutton"},{"86600":"Enfield"},{"86594":"Orpington"},{"86597":"Croydon"},{"86589":"Hounslow"},{"86596":"Mitcham"},{"86601":"Surbiton"},{"86604":"Twickenham"},{"86595":"West Drayton"},{"86607":"Pinner"},{"86599":"Wallington"},{"86603":"Greenford"},{"86606":"Hayes"},{"86598":"Ruislip"},{"86605":"Feltham"},{"67725":"Coulsdon"}],
-                 'South West England':[{"56201":"Bristol"},{"86409":"Devon"},{"86459":"Wiltshire"},{"86404":"Dorset"},{"86406":"Gloucestershire"},{"86448":"Somerset"},{"86456":"Cornwall"},{"77819":"Plymouth"},{"86393":"Bath & N E Somerset"},{"86440":"North Somerset"},{"86430":"Isles of Scilly"}],
-                 'Eastern England':[{"86458":"Essex"},{"86414":"Hertfordshire"},{"86455":"Norfolk"},{"86472":"Suffolk"},{"86420":"Cambridgeshire"},{"86413":"Bedfordshire"},{"77712":"Peterborough"}],
-                 'West Midlands':[{"83620":"Birmingham"},{"86416":"Staffordshire"},{"86446":"Shropshire"},{"86435":"Worcestershire"},{"83714":"Warwickshire"},{"":"Wolverhampton"},{"83714":"Coventry"},{"86454":"Herefordshire"},{"83849":"Walsall"},{"83787":"Solihull"},{"83826":"Sutton"},{"83759":"Dudley"},{"83871":"West Bromwich"},{"83780":"Oldbury"},{"83807":"Stourbridge"},{"83868":"Wednesbury"},{"83844":"Tipton"},{"83709":"Brierley Hill"},{"83769":"Halesowen"},{"83784":"Smethwick"},{"83877":"Willenhall"},{"83615":"Bilston"},{"83776":"Kingswinford"},{"83782":"Rowley Regis"}],
-                 'Yorkshire And The Humber':[{"86390":"West Yorkshire"},{"86391":"South Yorkshire"},{"86403":"North Yorkshire"},{"86398":"East Riding"},{"86418":"North East Lincolnshire"},{"86387":"North Lincolnshire"}],
-                 'East Midlands':[{"86547":"Nottinghamshire"},{"86421":"Derbyshire"},{"86402":"Leicestershire"},{"86412":"Northamptonshire"},{"86449":"Lincolnshire"},{"86577":"Rutland"},{"86615":"Northants"}],
-                 'Scotland':[{"86470":"Glasgow"},{"86566":"Edinburgh"},{"86433":"Aberdeenshire"},{"86494":"Highlands"},{"86485":"Midlothian"},{"86477":"North Lanarkshire"},{"86493":"Fife"},{"86468":"South Lanarkshire"},{"86487":"West Lothian"},{"86496":"Perth & Kinross"},{"62895":"Dundee"},{"86552":"Falkirk County"},{"86480":"Renfrewshire"},{"86498":"Argyll & Bute"},{"86535":"East Lothian"},{"86515":"County Stirling"},{"86471":"South Ayrshire"},{"86542":"Moray"},{"86479":"Dumfries & Galloway"},{"86467":"North Ayrshire"},{"86492":"East Ayrshire"},{"86497":"Borders"},{"192065":"East Dunbartonshire"},{"192064":"East Renfrewshire"},{"86560":"Angus"},{"86518":"Inverclyde"},{"86462":"West Dunbartonshire"},{"86563":"Shetland Islands"},{"86556":"Orkney Islands"},{"86483":"Western Isles"},{"86545":"Clackmannanshire"}],
-                 'Wales':[{"86500":"Cardiff County"},{"82564":"Swansea"},{"86551":"Powys"},{"86481":"Rhondda Cynon Taff"},{"86444":"Carmarthenshire"},{"86491":"Bridgend County"},{"73474":"Newport"},{"86280":"Wrexham"},{"86533":"Denbighshire"},{"86524":"Gwynedd"},{"86509":"Flintshire"},{"86508":"Neath Port Talbot"},{"86506":"Pembrokeshire"},{"86544":"Ceredigion"},{"86450":"The Vale of Glamorgan"},{"86522":"Conwy County"},{"86439":"Monmouthshire"},{"86475":"Caerphilly County"},{"86495":"Torfaen"},{"86558":"Merthyr Tydfil County"},{"86532":"Blaenau Gwent"},{"82693":"Swansea Enterprise Park"},{"86519":"Isle Of Anglesey"},{"82694":"Swansea Vale"}],
-                 'North East England':[{"86389":"Tyne & Wear"},{"86405":"County Durham"},{"86410":"Northumberland"}],
-                 'Northern Ireland':[{"55926":"Belfast"},{"86549":"County Antrim"},{"86575":"Derry"},{"86534":"County Down"},{"72912":"Lisburn"},{"59483":"Craigavon"},{"86474":"Newry & Mourne"},{"86567":"North Down"},{"86424":"Fermanagh"},{"86546":"County Tyrone"},{"76676":"Omagh"},{"86550":"Ards"},{"56460":"Carrickfergus"},{"58193":"Coleraine"},{"55554":"Ballymena"},{"55531":"Armagh"},{"71699":"Larne"},{"58294":"Cookstown"},{"72927":"Magherafelt"},{"81749":"Strabane"},{"55599":"Ballymoney"},{"72032":"Limavady"}],
-                 'Channel Islands':[{"86570":"Jersey"},{"86530":"Guernsey"}],
-                 'Isle Of Man':[{"70503":"Douglas"}],
-                }
+    locations = {'South East England': [{'86465': 'Kent'}, {'86437': 'Hampshire'}, {'86463': 'Surrey'}, {'86395': 'Buckinghamshire'}, {'86411': 'Oxfordshire'}, {'86466': 'East Sussex'}, {'86434': 'West Sussex'}, {'86464': 'Berkshire'}, {'86476': 'West Berkshire'}, {'86469': 'Isle Of Wight'}, {'86447': 'Windsor & Maidenhead'}], 'North West England': [{'86397': 'Greater Manchester'}, {'86415': 'Lancashire'}, {'86452': 'Cheshire'}, {'86419': 'Merseyside'}, {'86417': 'Cumbria'}], 
+                 'London': [{'86510': 'South West London'}, {'86583': 'South East London'}, {'86592': 'East London'}, {'86588': 'North West London'}, {'86593': 'West London'}, {'86590': 'Central London'}, {'86585': 'North London'}, {'86597': 'Croydon'}, {'86602': 'Harrow'}, {'86591': 'Uxbridge'}, {'86589': 'Hounslow'}, {'86600': 'Enfield'}, {'86608': 'Sutton'}, {'86594': 'Orpington'}, {'86595': 'West Drayton'}, {'86596': 'Mitcham'}, {'86604': 'Twickenham'}, {'86606': 'Hayes'}, {'86601': 'Surbiton'}, {'86605': 'Feltham'}, {'86607': 'Pinner'}, {'86603': 'Greenford'}, {'86599': 'Wallington'}, {'86598': 'Ruislip'}, {'67725': 'Coulsdon'}], 
+                 'South West England': [{'56201': 'Bristol'}, {'86406': 'Gloucestershire'}, {'86409': 'Devon'}, {'86459': 'Wiltshire'}, {'86404': 'Dorset'}, {'86448': 'Somerset'}, {'86456': 'Cornwall'}, {'77819': 'Plymouth'}, {'86393': 'Bath & N E Somerset'}, {'86440': 'North Somerset'}, {'86430': 'Isles of Scilly'}], 
+                 'Eastern England': [{'86458': 'Essex'}, {'86414': 'Hertfordshire'}, {'86455': 'Norfolk'}, {'86472': 'Suffolk'}, {'86420': 'Cambridgeshire'}, {'86413': 'Bedfordshire'}, {'77712': 'Peterborough'}], 
+                 'West Midlands': [{'83620': 'Birmingham'}, {'86416': 'Staffordshire'}, {'86446': 'Shropshire'}, {'86435': 'Worcestershire'}, {'86436': 'Warwickshire'}, {'83714': 'Coventry'}, {'83878': 'Wolverhampton'}, {'86454': 'Herefordshire'}, {'83849': 'Walsall'}, {'83787': 'Solihull'}, {'83826': 'Sutton Coldfield'}, {'83759': 'Dudley'}, {'83871': 'West Bromwich'}, {'83780': 'Oldbury'}, {'83868': 'Wednesbury'}, {'83844': 'Tipton'}, {'83807': 'Stourbridge'}, {'83769': 'Halesowen'}, {'83709': 'Brierley Hill'}, {'83784': 'Smethwick'}, {'83877': 'Willenhall'}, {'83615': 'Bilston'}, {'83776': 'Kingswinford'}, {'83782': 'Rowley Regis'}], 
+                 'Yorkshire And The Humber': [{'86390': 'West Yorkshire'}, {'86391': 'South Yorkshire'}, {'86403': 'North Yorkshire'}, {'86398': 'East Riding'}, {'86418': 'North East Lincolnshire'}, {'86387': 'North Lincolnshire'}], 
+                 'East Midlands': [{'86457': 'Nottinghamshire'}, {'86421': 'Derbyshire'}, {'86402': 'Leicestershire'}, {'86412': 'Northamptonshire'}, {'86449': 'Lincolnshire'}, {'86577': 'Rutland'}, {'86615': 'Northants'}], 
+                 'Scotland': [{'86566': 'Edinburgh'}, {'86470': 'Glasgow'}, {'86443': 'Aberdeenshire'}, {'86494': 'Highlands'}, {'86485': 'Midlothian'}, {'86477': 'North Lanarkshire'}, {'86493': 'Fife'}, {'86468': 'South Lanarkshire'}, {'86496': 'Perth & Kinross'}, {'86487': 'West Lothian'}, {'62895': 'Dundee'}, {'86552': 'Falkirk County'}, {'86480': 'Renfrewshire'}, {'86498': 'Argyll & Bute'}, {'86535': 'East Lothian'}, {'86515': 'County Stirling'}, {'86542': 'Moray'}, {'86471': 'South Ayrshire'}, {'86467': 'North Ayrshire'}, {'86479': 'Dumfries & Galloway'}, {'86492': 'East Ayrshire'}, {'86497': 'Borders'}, {'192065': 'East Dunbartonshire'}, {'86560': 'Angus'}, {'192064': 'East Renfrewshire'}, {'86518': 'Inverclyde'}, {'86462': 'West Dunbartonshire'}, {'86556': 'Orkney Islands'}, {'86563': 'Shetland Islands'}, {'86483': 'Western Isles'}, {'86545': 'Clackmannanshire'}], 
+                 'Wales': [{'86500': 'Cardiff County'}, {'82564': 'Swansea'}, {'86551': 'Powys'}, {'86481': 'Rhondda Cynon Taff'}, {'86444': 'Carmarthenshire'}, {'86491': 'Bridgend County'}, {'73474': 'Newport'}, {'86280': 'Wrexham'}, {'86533': 'Denbighshire'}, {'86509': 'Flintshire'}, {'86524': 'Gwynedd'}, {'86508': 'Neath Port Talbot'}, {'86544': 'Ceredigion'}, {'86506': 'Pembrokeshire'}, {'86439': 'Monmouthshire'}, {'86450': 'The Vale of Glamorgan'}, {'86522': 'Conwy County'}, {'86475': 'Caerphilly County'}, {'86495': 'Torfaen'}, {'86558': 'Merthyr Tydfil County'}, {'86532': 'Blaenau Gwent'}, {'82693': 'Swansea Enterprise Park'}, {'86519': 'Isle Of Anglesey'}, {'82694': 'Swansea Vale'}], 
+                 'North East England': [{'86389': 'Tyne & Wear'}, {'86405': 'County Durham'}, {'86410': 'Northumberland'}], 
+                 'Northern Ireland': [{'55926': 'Belfast'}, {'86575': 'Derry'}, {'86549': 'County Antrim'}, {'86534': 'County Down'}, {'72912': 'Lisburn'}, {'59483': 'Craigavon'}, {'86474': 'Newry & Mourne'}, {'86567': 'North Down'}, {'86424': 'Fermanagh'}, {'57460': 'Carrickfergus'}, {'55554': 'Ballymena'}, {'86546': 'County Tyrone'}, {'86550': 'Ards'}, {'58193': 'Coleraine'}, {'76676': 'Omagh'}, {'55531': 'Armagh'}, {'71699': 'Larne'}, {'72927': 'Magherafelt'}, {'58294': 'Cookstown'}, {'81749': 'Strabane'}, {'72032': 'Limavady'}, {'55599': 'Ballymoney'}], 
+                 'Channel Islands': [{'86570': 'Jersey'}, {'86530': 'Guernsey'}], 
+                 'Isle Of Man': [{'70503': 'Douglas'}]}
     categories = [{"12":"Healthcare & Nursing Jobs"},{"19":"Other/General Jobs"},{"27":"Teaching Jobs"},{"16":"Logistics & Warehouse Jobs"},{"26":"Social Work Jobs"},{"9":"Engineering Jobs"},{"7":"Domestic Help & Cleaning Jobs"},{"13":"Hospitality & Catering Jobs"},{"177":"Social Care Jobs"},{"23":"Sales Jobs"},{"22":"Retail Jobs"},{"2":"Admin Jobs"},{"18":"Manufacturing Jobs"},{"1":"Accounting & Finance Jobs"},{"28":"Trade & Construction Jobs"},{"17":"Maintenance Jobs"},{"11":"HR & Recruitment Jobs"},{"6":"Customer Services Jobs"},{"5":"Creative & Design Jobs"},{"25":"Security & Protective Services Jobs"},{"14":"IT Jobs"},{"24":"Scientific & QA Jobs"},{"8":"Energy, Oil & Gas Jobs"},{"20":"PR, Advertising & Marketing Jobs"},{"15":"Legal Jobs"},{"21":"Property Jobs"},{"10":"Graduate Jobs"},{"4":"Consultancy Jobs"},{"3":"Agriculture, Fishing & Forestry Jobs"},{"29":"Travel Jobs"}]
     allJobs = 0
     for state in list(locations.keys()):
@@ -54,7 +52,7 @@ def main():
                 print('------All positions:', positions)
                 print('------Page size:', pageSize)
                 jobsCount = 0
-                for i, page in enumerate(range(1, 1+round(positions/pageSize)),1): # Loob through every page
+                for i, page in enumerate(range(1, 2+int(positions/pageSize)),1): # Loob through every page
                     print(f'------Page: {i}')
                     print(f'------{jobsCount} jobs collected.')
                     params = {
@@ -72,7 +70,6 @@ def main():
                                 print('--------Bad response')
                                 headers = staticHeadersRotator()
                             print("--------Page request Succeed ")
-                            jobsCount+=len(mainData)
                             break # Until the the requeset secceed
                         except: # Otherwise 
                             print("--------Page request failled")
@@ -176,7 +173,10 @@ def get_website_structure(url, headers, params, session):
             continue # And Loop Again
     soup = BeautifulSoup(responce.text, 'lxml')
     data = soup.find('h1', class_="govuk-heading-l")
-    allPositions = int(data.text.strip().split(' ')[0].replace(',', ''))
+    try:
+        allPositions = int(data.text.strip().split(' ')[0].replace(',', ''))
+    except:
+        return 1
     return allPositions
 
 def save_job_info(id,title,postingDate,salary,hours,closingDate,location,state,city,company,jobType,category,jobReference,additionalSalaryInf):
@@ -223,7 +223,7 @@ def staticHeadersRotator():
     return choice(headers)
 
 def apiheadersRotator():
-    response = requests.get('https://headers.scrapeops.io/v1/browser-headers',params={'api_key': 'fba52e3f-8ad2-4af3-a04c-e2f567f1fe8e','num_headers': '10'})
+    response = requests.get('https://headers.scrapeops.io/v1/browser-headers',params={'api_key': apiKey,'num_headers': '10'})
     headers = response.json()['result']
     return choice(headers)
 

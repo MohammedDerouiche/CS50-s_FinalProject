@@ -93,10 +93,10 @@ def main():
     "https": f"http://{ip}:{port}"
     }
     # positions = get_website_structure(url, headers=headers, proxies=proxies, json=json_data)
-    for page in range(21, int(151563/1000)+1):
+    for page in range(11, int(151563/1000)+1):
         print(f'page {str(page)}, means {str((page-1)*1000)} jobs')
         json_data = {
-        'resultsPerPage': 500,
+        'resultsPerPage': 1000,
         'page': page,
         'job_type': [],
         'pay_min': None,

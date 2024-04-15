@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% block title %}Salary Search{% endblock %}
+
+{% block content %}
+    <!-- Search bar -->
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col">
+            <div class="card">
+                <div class="card-body" style="padding-bottom: 4px; padding-top: 4px;">
+                    <form action="/jobSearch" method="post">
+                        <div class="row">
+                            <div class="mb-3 col" >
+                                <label for="jobTitle" class="form-label">Job title</label>
+                                <input type="text" class="form-control" id="jobTitle" aria-describedby="jobTitleHelp" name="jobTitle">
+                                <div id="jobTitleHelp" class="form-text">Type in a job title</div>
+                            </div>
+                            <div class="mb-3 col" >
+                                <label for="jobState" class="form-label">State</label>
+                                <input type="text" class="form-control" id="jobState" aria-describedby="jobStateHelp" name="jobState">
+                                <div id="jobStateHelp" class="form-text">Type in a state for search</div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Find salary</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> <!-- $Search bar -->
+
+    {% if jobSearch %}
+
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col">
+            <div class="card">
+                <div class="card-body row" style="padding-bottom: 4px; padding-top: 4px;">
+                    <div class="card col" style="margin-left: 3px;">
+                        <div class="card-header">
+                            <h1 class="card-title">Chart 4:</h1>
+                        </div>
+                        <div class="card-body" style="height: 400px; overflow-y: auto;">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Posting Date</th>
+                                        <th>Hours</th>
+                                        <th>Closing Date</th>
+                                        <th>State</th>
+                                        <th>City</th>
+                                        <th>Company</th>
+                                        <th>Job Type</th>
+                                        <th>Category</th>
+                                        <th>Min Salary</th>
+                                        <th>Max Salary</th>
+                                        <th>Avg Salary</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for job in jobSearch %}
+                                        <tr>
+                                            <td>{{ job[0] }}</td>
+                                            <td>{{ job[1] }}</td>
+                                            <td>{{ job[2] }}</td>
+                                            <td>{{ job[3] }}</td>
+                                            <td>{{ job[4] }}</td>
+                                            <td>{{ job[5] }}</td>
+                                            <td>{{ job[6] }}</td>
+                                            <td>{{ job[7] }}</td>
+                                            <td>{{ job[8] }}</td>
+                                            <td>{{ job[9] }}</td>
+                                            <td>{{ job[10] }}</td>
+                                            <td>{{ job[11] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

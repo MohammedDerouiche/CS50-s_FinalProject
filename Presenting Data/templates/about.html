@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+
+{% block title %}Salary Search{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <!-- Main content area -->
+
+                <!-- About Us Page -->
+                <div>
+                    <h1 class="text-center">Welcome to UK Salaries Analyser</h1>
+                    <p class="lead text-center">Empowering Job Seekers with Informed Career Decisions</p>
+
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h2 class="card-title">About The Project, Me, Us</h2>
+                            <p class="card-text">
+                                Welcome to UK Salaries Analyser, the culmination of my journey towards obtaining the CS50
+                                Introduction to Computer Science certification. This platform is designed to empower job
+                                seekers with invaluable insights into specific roles, aiding them in making informed
+                                decisions about their career paths.
+                            </p>
+                            <p class="card-text">
+                                My mission is to provide a comprehensive platform for job seekers, offering detailed
+                                analyses of roles, salaries, and industries. My envision a space where individuals can gain
+                                a deeper understanding of their desired professions, enabling them to navigate the job market
+                                with confidence.
+                            </p>
+                            <p class="card-text">
+                                Me, Mohammed Derouiche, the founder of this platform, embarked on a personal quest for a data analyst
+                                position. While exploring job listings and utilizing various salary analysis tools, the
+                                realization struck — why not conduct the analyses personally? Thus, the genesis of this
+                                project, born out of the desire to empower individuals to independently explore and
+                                understand their professional landscape.
+                            </p>
+                            <ul>
+                                <li><b>Salary Analysis per Title:</b> Gain insights into salary trends specific to job
+                                    titles.</li>
+                                <li><b>Salary Analysis per Location:</b> Explore salary variations across different
+                                    locations.</li>
+                                <li><b>Salary Analysis per Industry:</b> Delve into industry-specific salary analyses.</li>
+                                <li><b>Job Listings:</b> Access a curated collection of job listings.</li>
+                                <li><b>Salary Comparison:</b> Easily compare salaries for informed decision-making.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Methodology Page -->
+                <div class="mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">Methodology</h2>
+                            <p class="card-text">
+                                Data for UK Salaries Analyser is meticulously collected from the GOV.UK job listing
+                                website, employing web scraping techniques facilitated by the BeautifulSoup and Requests
+                                libraries.
+                            </p>
+                            <p class="card-text">
+                                Utilizing Jupyter Notebooks, my data processing pipeline involves thorough exploration
+                                and cleaning:
+                            </p>
+                            <ol>
+                                <li>Correction of data types.</li>
+                                <li>Extraction of salaries from text.</li>
+                                <li>Removal of outliers.</li>
+                                <li>Imputation of null values.</li>
+                            </ol>
+                            <p class="card-text">
+                                To ensure the accuracy and reliability of my results, I conducted a comparative analysis
+                                against talent.com, validating my findings and affirming their integrity.
+                            </p>
+                            <p class="card-text">
+                                UK Salaries Analyser is a prototype poised for future enhancements. Anticipate the inclusion
+                                of international job data beyond the UK, as well as additional tools such as a tax calculator
+                                and skills analysis features.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

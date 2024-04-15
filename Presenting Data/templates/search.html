@@ -1,0 +1,268 @@
+{% extends 'layout.html' %}
+
+{% block title %}Salary Search{% endblock %}
+
+{% block content %}
+    <!-- Search bar -->
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col">
+            <div class="card">
+                <div class="card-body" style="padding-bottom: 4px; padding-top: 4px;">
+                    <form action="/jobAnalysisT" method="post">
+                        <div class="row">
+                            <div class="mb-3 col" >
+                                <label for="jobTitle" class="form-label">Job title</label>
+                                <input type="text" class="form-control" id="jobTitle" aria-describedby="jobTitleHelp" name="jobTitle">
+                                <div id="jobTitleHelp" class="form-text">Type in a job title</div>
+                            </div>
+                            <div class="mb-3 col" >
+                                <label for="jobState" class="form-label">State</label>
+                                <input type="text" class="form-control" id="jobState" aria-describedby="jobStateHelp" name="jobState">
+                                <div id="jobStateHelp" class="form-text">Type in a state for search</div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Find salary</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> <!-- $Search bar -->
+
+    {% if sqlJsonData %}
+
+    <!-- Cards -->
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col">
+            <div class="card">
+                <div class="card-body row" style="padding-bottom: 4px; padding-top: 4px;">
+                    <div class="card col text-bg-primary" style="margin-right: 2px;">
+                        <div class="card-header">AVG</div>
+                        <div class="card-body">
+                            <h1 class="text-center">{{round(avg,2)}}</h1>
+                        </div>
+                    </div>
+                    <div class="card col text-bg-success" style="margin-right: 2px;">
+                        <div class="card-header">MAX</div>
+                        <div class="card-body">
+                            <h1 class="text-center">{{round(max,2)}}</h1>
+                        </div>
+                    </div>
+                    <div class="card col text-bg-danger" style="margin-right: 2px;">
+                        <div class="card-header">MIN</div>
+                        <div class="card-body">
+                            <h1 class="text-center">{{round(min,2)}}</h1>
+                        </div>
+                    </div>
+                    <div class="card col text-bg-info" style="margin-right: 2px;">
+                        <div class="card-header">Overall AVG</div>
+                        <div class="card-body">
+                            <h1 class="text-center">{{round(Avg,2)}}</h1>
+                        </div>
+                    </div>
+                    <div class="card col text-bg-warning" style="margin-right: 2px;">
+                        <div class="card-header">AVG to AVG Disparity</div>
+                        <div class="card-body row">
+                            <div class="col" style="padding: 0;">
+                                {% if avg>Avg %}
+                                <h1 class="text-center text-success ">+{{round(avg-Avg,2)}}£</h1> 
+                                {% elif avg<Avg %}
+                                <h1 class="text-center text-danger">-{{round(Avg-avg,2)}}£</h1>
+                                {% endif %}
+                            </div>
+                            <div class="col" style="padding: 0;">
+                                {% if avg>Avg %}
+                                <h1 class="text-center text-success ">+{{round((avg-Avg)*100/Avg)}}%</h1> 
+                                {% elif avg<Avg %}
+                                <h1 class="text-center text-danger">-{{round((Avg-avg)*100/Avg)}}%</h1>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- $cards -->
+
+    <!-- Avg salaries per state/city graphs -->
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col">
+            <div class="card" style="height: 500px;"> <!-- Adjust the height as needed -->
+                <div class="card-body row" style="padding-bottom: 4px; padding-top: 4px;">
+                    <div class="card col" style="margin-right: 2px;">
+                        <div class="card-header">Average Salary per State</div>
+                        <div class="card-body" style="display: flex; align-items: center; justify-content: center;">
+                            <canvas id="stateChart" style="width: 100%; height: 100%;"></canvas>
+                        </div>
+                    </div>
+                    <div class="card col" style="margin-left: 2px;">
+                        <div class="card-header">Average Salary per City</div>
+                        <div class="card-body" style="display: flex; align-items: center; justify-content: center;">
+                            <canvas id="cityChart" style="width: 100%; height: 100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- $Avg salaries per state/city graphs -->
+ 
+    <!-- Avg salaries per company/industry graphs -->
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col">
+            <div class="card" style="height: 500px;"> <!-- Adjust the height as needed -->
+                <div class="card-body row" style="padding-bottom: 4px; padding-top: 4px;">
+                    <div class="card col" style="margin-right: 2px;">
+                        <div class="card-header">Average Salary per company</div>
+                        <div class="card-body" style="display: flex; align-items: center; justify-content: center;">
+                            <canvas id="companyAvg" style="width: 100%; height: 100%;"></canvas>
+                        </div>
+                    </div>
+                    <div class="card col" style="margin-left: 2px;">
+                        <div class="card-header">Average Salary per industry</div>
+                        <div class="card-body" style="display: flex; align-items: center; justify-content: center;">
+                            <canvas id="categoryAvg" style="width: 100%; height: 100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- $Avg salaries per company/industry graphs -->
+  
+    <!-- Search result table -->
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col">
+            <div class="card">
+                <div class="card-body row" style="padding-bottom: 4px; padding-top: 4px;">
+                    <div class="card col" style="margin-left: 3px;">
+                        <div class="card-header">Job Search Results ({{len(all_jobs_data) if len(all_jobs_data)<100 else "+100"}} results found)</div>
+                        <div class="card-body" style="height: 400px; overflow-y: auto;">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Posting Date</th>
+                                        <th>Hours</th>
+                                        <th>Closing Date</th>
+                                        <th>State</th>
+                                        <th>City</th>
+                                        <th>Company</th>
+                                        <th>Job Type</th>
+                                        <th>Category</th>
+                                        <th>Min Salary</th>
+                                        <th>Max Salary</th>
+                                        <th>Avg Salary</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for job in all_jobs_data %}
+                                        <tr>
+                                            <td>{{ job[0] }}</td>
+                                            <td>{{ job[1] }}</td>
+                                            <td>{{ job[2] }}</td>
+                                            <td>{{ job[3] }}</td>
+                                            <td>{{ job[4] }}</td>
+                                            <td>{{ job[5] }}</td>
+                                            <td>{{ job[6] }}</td>
+                                            <td>{{ job[7] }}</td>
+                                            <td>{{ job[8] }}</td>
+                                            <td>{{ job[9] }}</td>
+                                            <td>{{ job[10] }}</td>
+                                            <td>{{ job[11] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- $Search result table -->
+
+    {% endif %}
+    
+{% endblock %}
+
+{% block scripts %}
+
+  
+  <!-- Avg salaries per company graph-->
+  <script>
+    var jsonData = {{ sqlJsonData2 | safe }};
+
+    var ctx = document.getElementById('companyAvg').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: jsonData.map(item => item.company),
+            datasets: [{
+                label: 'AVG Salary',
+                data: jsonData.map(item => item.avg_salary),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+  </script>
+  
+  <!-- Avg salaries per industry graph -->
+  <script>
+    var jsonData = {{ sqlJsonData3 | safe }};
+
+    var ctx = document.getElementById('categoryAvg').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: jsonData.map(item => item.category),
+            datasets: [{
+                label: 'AVG Salary',
+                data: jsonData.map(item => item.avg_salary),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+  </script>
+
+  <!-- Avg salaries per state graph -->
+  <script>
+    var jsonData = {{ sqlJsonData | safe }};
+
+    var ctx = document.getElementById('stateChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: jsonData.map(item => item.state),
+            datasets: [{
+                label: 'AVG Salary',
+                data: jsonData.map(item => item.avg_salary),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+  </script>
+
+  <!-- Avg salaries per city graph -->
+  <script>
+    var jsonData = {{ sqlJsonData1 | safe }};
+
+    var ctx1 = document.getElementById('cityChart').getContext('2d');
+    var myChart1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: jsonData.map(item => item.city),
+            datasets: [{
+                label: 'AVG Salary',
+                data: jsonData.map(item => item.avg_salary),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+  </script>
+  
+{% endblock %}

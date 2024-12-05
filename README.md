@@ -26,15 +26,3 @@ This project employs the following skills, languages, and libraries:
 
 - **Skills:** Web scraping, data cleaning, data transformation, exploratory data analysis (EDA), web development, data visualization
 
-## Extracted Features
-
-The web scraper collects a variety of features from job listings, providing a comprehensive dataset for analysis. The extracted features include:
-
-- **jobTitle**: The title of the job
-- **companyName**: The name of the company offering the job
-- **location**: The location of the job
-- **salary**: The salary range offered
-- **jobDescription**: Detailed description of the job responsibilities
-- **requirements**: The requirements or qualifications needed for the job
-- **datePosted**: The date when the job was posted
-

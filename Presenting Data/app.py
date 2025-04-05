@@ -22,8 +22,7 @@ def search():
     if request.method == "POST":
         title = request.form["jobTitle"]
         state = request.form["jobState"]
-        conn = sqlite3.connect(r"C:\Users\user\Desktop\My Projects\CS50-s_FinalProject\Collecting Data\GOV.UK\Jobs.db")
-        
+        conn = sqlite3.connect(r"..\Collecting Data\GOV.UK\Jobs.db")
         cursor = conn.cursor()
         cursor.execute(f'SELECT AVG(avgSalary) FROM Jobs;')
         Avg = cursor.fetchall()[0][0]
@@ -82,7 +81,7 @@ def jobSearch():
     if request.method == "GET":
         return render_template('jobSearch.html')
     elif request.method == "POST":
-        conn = sqlite3.connect(r"C:\Users\user\Desktop\My Projects\CS50-s_FinalProject\Collecting Data\GOV.UK\Jobs.db")
+        conn = sqlite3.connect(r"..\Collecting Data\GOV.UK\Jobs.db")
         cursor = conn.cursor()
         cursor.execute(f'SELECT * FROM Jobs WHERE title LIKE "{request.form["jobTitle"]}%" and state = "{request.form["jobState"]}%" LIMIT 100;')
         jobSearch = cursor.fetchall()
